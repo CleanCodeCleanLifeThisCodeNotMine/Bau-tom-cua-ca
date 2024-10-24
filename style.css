@@ -4,6 +4,10 @@ body {
     background-color: #f4f4f9;
     margin: 0;
     padding: 0;
+    background-image: url("background.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 h1 {
