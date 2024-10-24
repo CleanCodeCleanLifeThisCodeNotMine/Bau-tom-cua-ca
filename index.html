@@ -46,4 +46,15 @@
 <div id="result"></div>
 
 </body>
+<script>
+    function checkAge() {
+        let isConfirmed = confirm("Bạn đã đủ 18 tuổi chưa?");
+        if (!isConfirmed) {
+            window.location.href = "https://youtu.be/fwCDaowR1nE";
+        }
+    }
+
+
+    window.onload = checkAge;
+</script>
 </html>
