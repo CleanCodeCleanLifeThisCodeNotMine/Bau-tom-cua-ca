@@ -5,6 +5,17 @@ function getRandomChoice() {
     return choices[Math.floor(Math.random() * choices.length)];
 }
 
+//Add 1000
+function addBet(betId, amount) {
+    let betInput = document.getElementById(betId);
+    let currentBet = parseInt(betInput.value) || 0;
+    betInput.value = currentBet + amount;
+}
+//Clear
+function clearBet(betId) {
+    document.getElementById(betId).value = '';
+}
+
 function updateScoreDisplay() {
     document.getElementById('score').innerHTML = `Điểm hiện tại: ${score}`;
 }
@@ -20,8 +31,7 @@ function playGame() {
     let totalBet = bauBet + tomBet + cuaBet + caBet + meoBet + naiBet;
 
     if (totalBet > score) {
-        // document.write("Bạn không có đủ điểm để cược số tiền này.");
-        document.getElementById("result").innerHTML = "Bạn không có đủ điểm để cược số tiền này."
+        document.getElementById("result").innerHTML = "Bạn không có đủ điểm để cược số tiền này.";
         return;
     }
 
@@ -33,7 +43,6 @@ function playGame() {
 
     let winnings = 0;
 
-    // Tính số điểm thắng dựa trên kết quả (mỗi lần trùng *2 số tiền cược)
     if (result1 === 'Bầu') winnings += bauBet * 2;
     if (result2 === 'Bầu') winnings += bauBet * 2;
     if (result3 === 'Bầu') winnings += bauBet * 2;
@@ -62,10 +71,18 @@ function playGame() {
     updateScoreDisplay();
 
     if (winnings > 0) {
-        document.getElementById('result').innerHTML += `<br>Chúc mừng! Bạn đã thắng ${winnings} điểm!`;
+        document.getElementById('result').innerHTML += `<br>Chúc mừng! Bạn đã thắng ${winnings - 1000} điểm!`;
     } else {
         document.getElementById('result').innerHTML += "<br>Rất tiếc! Bạn đã thua!";
     }
+
+    // Xóa giá trị trong tất cả các ô cược sau khi quay
+    document.getElementById('bauBet').value = '';
+    document.getElementById('tomBet').value = '';
+    document.getElementById('cuaBet').value = '';
+    document.getElementById('caBet').value = '';
+    document.getElementById('meoBet').value = '';
+    document.getElementById('naiBet').value = '';
 }
 
 updateScoreDisplay();
