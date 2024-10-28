@@ -11,6 +11,7 @@ function addBet(betId, amount) {
     let currentBet = parseInt(betInput.value) || 0;
     betInput.value = currentBet + amount;
 }
+
 //Clear
 function clearBet(betId) {
     document.getElementById(betId).value = '';
@@ -27,7 +28,6 @@ function playGame() {
     let caBet = parseInt(document.getElementById('caBet').value) || 0;
     let meoBet = parseInt(document.getElementById('meoBet').value) || 0;
     let naiBet = parseInt(document.getElementById('naiBet').value) || 0;
-
     let totalBet = bauBet + tomBet + cuaBet + caBet + meoBet + naiBet;
 
     if (totalBet > score) {
@@ -38,11 +38,9 @@ function playGame() {
     let result1 = getRandomChoice();
     let result2 = getRandomChoice();
     let result3 = getRandomChoice();
-
     document.getElementById('result').innerHTML = `Kết quả: ${result1}, ${result2}, ${result3}.`;
 
     let winnings = 0;
-
     if (result1 === 'Bầu') winnings += bauBet * 2;
     if (result2 === 'Bầu') winnings += bauBet * 2;
     if (result3 === 'Bầu') winnings += bauBet * 2;
@@ -71,7 +69,7 @@ function playGame() {
     updateScoreDisplay();
 
     if (winnings > 0) {
-        document.getElementById('result').innerHTML += `<br>Chúc mừng! Bạn đã thắng ${winnings - 1000} điểm!`;
+        document.getElementById('result').innerHTML += `<br>Chúc mừng! Bạn đã thắng ${winnings - totalBet} điểm!`;
     } else {
         document.getElementById('result').innerHTML += "<br>Rất tiếc! Bạn đã thua!";
     }
@@ -83,6 +81,30 @@ function playGame() {
     document.getElementById('caBet').value = '';
     document.getElementById('meoBet').value = '';
     document.getElementById('naiBet').value = '';
+
+    // Thêm kết quả vào lịch sử
+    let historyList = document.getElementById('history-list');
+    let newHistoryItem = document.createElement('li');
+
+    // Tạo chuỗi kết quả cược
+    let betResults = [];
+    if (bauBet > 0) betResults.push(`Bầu: ${bauBet}`);
+    if (tomBet > 0) betResults.push(`Tôm: ${tomBet}`);
+    if (cuaBet > 0) betResults.push(`Cua: ${cuaBet}`);
+    if (caBet  > 0) betResults.push(`Cá: ${caBet}`);
+    if (meoBet > 0) betResults.push(`Mèo: ${meoBet}`);
+    if (naiBet > 0) betResults.push(`Nai: ${naiBet}`);
+
+    // Kết hợp kết quả cược thành chuỗi
+    let betResultsStr = betResults.join(', ');
+
+    newHistoryItem.innerHTML = `Kết quả: ${result1}, ${result2}, ${result3}. Cược: ${betResultsStr}. Điểm: ${score}`;
+    historyList.insertBefore(newHistoryItem, historyList.firstChild);
+
+    // Giới hạn số lượt chơi hiển thị tối đa là 5
+    while (historyList.children.length > 5) {
+        historyList.removeChild(historyList.lastChild);
+    }
 }
 
 updateScoreDisplay();

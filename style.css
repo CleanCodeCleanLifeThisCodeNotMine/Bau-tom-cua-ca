@@ -88,3 +88,31 @@ button:hover {
 .item button:hover {
     background-color: #ec971f;
 }
+
+#history-container {
+    margin-top: 30px;
+    padding: 10px;
+    background-color: #e9ecef;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    width: 450px; /*chiều dài*/
+    height: 250px; /* Điều chỉnh chiều cao theo ý muốn */
+    overflow-y: auto; /* Thêm thanh cuộn nếu nội dung vượt quá chiều cao */
+    margin-left: auto;
+    margin-right: auto;
+}
+#history-list {
+    list-style-type: none;
+    padding: 0;
+    font-size: 14px;
+}
+#history-list li {
+    margin: 5px 0;
+    padding: 5px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
